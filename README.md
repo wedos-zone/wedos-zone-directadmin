@@ -160,14 +160,18 @@ Addresses of WEDOS.protection itself and private addresses are left out: the pro
 reach them. If no address is left, protection is not switched on and the Protection tab
 says why. Each protected domain shows its origin.
 
-**After moving an account or changing the server IP, change the origin yourself.** The
-proxy keeps sending visitors to the address it got when protection was switched on. Once a
-day the plugin compares it with the IP DirectAdmin uses for the domain. When they differ,
-the Protection tab shows both addresses and you get a notification. The plugin cannot
-change the origin for you, because WAPI cannot. Change the target IP of the protection in
-the WEDOS administration, then click **Target changed** (or run
-`wz.php protection origin <domain>`). Only IPv4 is compared. Domains whose service was not
-created by the plugin show no origin and are not checked.
+**After moving an account or changing the server IP, point the protection to this
+server.** The proxy keeps sending visitors to the address it got when protection was
+switched on. Once a day the plugin reads the origin from WEDOS and compares it with the
+IP that DirectAdmin uses for the domain. A change made by hand in the WEDOS administration
+is picked up too. When they differ, the Protection tab shows both addresses and you get a
+notification. Nothing changes on its own, because a move may be temporary. Click
+**Point to this server** (or run `wz.php protection origin <domain>`): the plugin sends
+the domain's IPv4 address to WEDOS and reads the origin back, and the warning goes away
+only when WEDOS reports the new address. An IPv6 target is kept as it was, since
+DirectAdmin does not report the IPv6 address of a domain; if it belongs to the old server,
+change it in the WEDOS administration. Only IPv4 is compared. For a service that was not
+created by the plugin, the origin is shown but not checked or changed.
 
 **Before you switch protection off, make sure the server has a certificate for the
 domain.** While the domain is protected, WEDOS serves the certificate. After switching
